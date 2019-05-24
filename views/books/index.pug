@@ -1,0 +1,51 @@
+extends ../layout
+
+block content
+  h1= title
+
+  form(action="/books/search" class="search-form")
+    p
+      label(for="search") SEARCH:
+      input(type="search", name="term", placeholder="Search book by title")
+
+    input(type="submit" value="Search")
+
+  p
+    a(class='button' href="/books/new") Create New Book
+  
+  table
+    thead
+      tr
+        th Title
+        th Author
+        th Genre
+        th Year
+      tr
+    tbody
+    each book in books
+      tr
+        td 
+          a(href = "/books/" + book.id)= book.title
+        td= book.author
+        td= book.genre
+        td= book.year
+
+  div#container
+    
+  script. 
+    var search = window.location.search;
+    var pages = "#{pages}";
+    var elem = '';
+    console.log(search);
+    for (i=1;i<=pages; i++) {
+      var pageNum = i;
+      if (search) {
+        elem += `<a href="/books/search/page/${pageNum}${search}">${pageNum}`;   
+      }
+      else {
+        elem += `<a href="/books/page/${pageNum}">${pageNum}`;   
+      }
+    }
+    document.getElementById('container').innerHTML = '<a href="/books">All Books</a>' + elem;
+
+    

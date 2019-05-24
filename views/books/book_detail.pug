@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  h1= title
+  include errors
+  
+  form(action="/books/" + book.id + "?_method=PUT", method="post")
+    include form
+
+  form(action="/books/" + book.id + "?_method=DELETE", method="post", onsubmit="return confirm('Do you really want to delete this book?')")
+    p
+      a(class='button' href="/books/") Cancel
+    p
+      input(type="submit", value = "Delete Book")
