@@ -34,18 +34,39 @@ block content
     
   script. 
     var search = window.location.search;
+    var url = window.location.href;
     var pages = "#{pages}";
+    var route = "#{routeUrl}";
+
+    console.log(route);
     var elem = '';
-    console.log(search);
     for (i=1;i<=pages; i++) {
       var pageNum = i;
-      if (search) {
-        elem += `<a href="/books/search/page/${pageNum}${search}">${pageNum}`;   
-      }
-      else {
-        elem += `<a href="/books/page/${pageNum}">${pageNum}`;   
+      if (window.location.href.indexOf("/books/page") > -1 || window.location.href.indexOf("/books/search") > -1) {
+        if (search) {
+          elem += `<a class="toggleButton" href="/books/search/page/${pageNum}${search}">${pageNum}`;   
+        }
+        else {
+          elem += `<a class="toggleButton" href="/books/page/${pageNum}">${pageNum}`;   
+        }
       }
     }
+    if (route) {
     document.getElementById('container').innerHTML = '<a href="/books">All Books</a>' + elem;
+    } else {
+    document.getElementById('container').innerHTML = '<a href="/books/page/1">Paginate</a>' + elem; 
+    }
+    var currentPage = window.location.pathname.split('/page/')[1];
+    var selectedButton = document.querySelectorAll('#container a');
+    console.log(selectedButton);
+    if (window.location.href.indexOf('search?term') > -1) {
+        document.querySelectorAll('#container a')[1].classList.add('active');
+    }    
+    for (var i = 0; i < selectedButton.length; i++) {
+      if (!selectedButton[i].innerHTML.indexOf(currentPage)) {
+        selectedButton[i].classList.add('active')
+      } 
+    }
+
 
     

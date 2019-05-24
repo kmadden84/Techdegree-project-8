@@ -13,7 +13,7 @@ router.get('/', function (req, res, next) {
     Book.findAll({
       order: [["year", "DESC"]]
     }).then(function (books) {
-      res.render("books/index", { books: books, title: "Books", pages: pages });
+      res.render("books/index", { books: books, title: "Books", pages: pages, allUrl: "allUrl" });
     }).catch(function (err) {
       res.send(500);
     });
@@ -34,7 +34,7 @@ router.get('/page/:page', function (req, res, next) {
       offset: offset,
       $sort: { id: 1 }
     }).then(function (books) {
-      res.render("books/index", { books: books, title: "Books", pages: pages });
+      res.render("books/index", { books: books, title: "Books", pages: pages, routeUrl: "routeUrl" });
     }).catch(function (err) {
       res.send(500);
     });
@@ -74,7 +74,7 @@ router.get('/search', function (req, res, next) {
     limit: 5
   }).then(function (books) {
     let pages = Math.ceil(books.count / limit);
-    res.render("books/index", { books: books.rows, title: "Books", pages: pages });
+    res.render("books/index", { books: books.rows, title: "Books", pages: pages, routeUrl: "routeUrl" });
   }).catch(function (err) {
     res.send(500);
   });
@@ -112,7 +112,7 @@ router.get('/search/page/:page', function (req, res, next) {
     limit: limit
   }).then(function (books) {
     let pages = Math.ceil(books.count / limit);
-    res.render("books/index", { books: books.rows, title: "Books", pages: pages });
+    res.render("books/index", { books: books.rows, title: "Books", pages: pages, routeUrl: "routeUrl" });
   }).catch(function (err) {
     res.send(500);
   });

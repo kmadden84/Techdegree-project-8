@@ -128,3 +128,8 @@ div#container a:first-child {
 div#container {
   margin-top: 20px;
 }
+a.toggleButton.active {
+  font-weight: bold;
+  font-size: 20px;
+  color: #000;
+}
