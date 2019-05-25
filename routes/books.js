@@ -15,10 +15,22 @@ router.get('/', function (req, res, next) {
     }).then(function (books) {
       res.render("books/index", { books: books, title: "Books", pages: pages, allUrl: "allUrl" });
     }).catch(function (err) {
-      res.send(500);
+      res.send(500, err);
     });
   });
 });
+
+
+// router.get('/', function(req, res, next) {
+//   Book.findAll({order: [["createdAt", "DESC"]]}).then(function(books){
+//     res.render("books/index", {books: books, title: "My Awesome Blog" });
+//   }).catch(function(error){
+//       res.send(500, error);
+//    });
+// });
+
+
+
 
 /* GET pagination articles listing. */
 router.get('/page/:page', function (req, res, next) {
@@ -158,6 +170,9 @@ router.get("/:id/edit", function (req, res, next) {
   });
 });
 
+
+
+
 /* Delete article form. */
 router.get("/:id/delete", function (req, res, next) {
   Book.findByPk(req.params.id).then(function (book) {
@@ -219,22 +234,25 @@ router.put("/:id", function (req, res, next) {
     }
   }).catch(function (err) {
     res.send(500);
+    console.log(err)
   });
 });
 
 /* DELETE individual book. */
 router.delete("/:id", function (req, res, next) {
   Book.findByPk(req.params.id).then(function (book) {
+    console.log
     if (book) {
       return book.destroy();
     } else {
       res.send(404);
     }
   }).then(function () {
-    ;
     res.redirect("/books");
   }).catch(function (err) {
     res.send(500);
+    res.send(err)
+    console.log(err)
   });
 });
 
