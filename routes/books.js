@@ -21,17 +21,6 @@ router.get('/', function (req, res, next) {
 });
 
 
-// router.get('/', function(req, res, next) {
-//   Book.findAll({order: [["createdAt", "DESC"]]}).then(function(books){
-//     res.render("books/index", {books: books, title: "My Awesome Blog" });
-//   }).catch(function(error){
-//       res.send(500, error);
-//    });
-// });
-
-
-
-
 /* GET pagination articles listing. */
 router.get('/page/:page', function (req, res, next) {
   let pageCount;
