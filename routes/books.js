@@ -8,7 +8,7 @@ const Op = Sequelize.Op;
 /* GET articles listing. */
 router.get('/', function (req, res, next) {
   Book.findAndCountAll().then((data) => {
-    let limit = 5;
+    const limit = 5;
     pages = Math.ceil(data.count / limit);
     Book.findAll({
       order: [["year", "DESC"]]
@@ -25,7 +25,7 @@ router.get('/', function (req, res, next) {
 router.get('/page/:page', function (req, res, next) {
   let pageCount;
   Book.findAndCountAll().then((data) => {
-    let limit = 5;
+    const limit = 5;
     let page = req.params.page;      // page number
     let pages = Math.ceil(data.count / limit);
     offset = limit * (page - 1);
@@ -47,7 +47,7 @@ router.get('/page/:page', function (req, res, next) {
 
 router.get('/search', function (req, res, next) {
   const { term } = req.query;
-  let limit = 5;
+  const limit = 5;
   let page = req.params.page;      // page number
   let offset = limit * (page - 1);
   Book.findAndCountAll({
@@ -86,7 +86,7 @@ router.get('/search', function (req, res, next) {
 
 router.get('/search/page/:page', function (req, res, next) {
   const { term } = req.query;
-  let limit = 5;
+  const limit = 5;
   let page = req.params.page;      // page number
   let offset = limit * (page - 1);
   Book.findAndCountAll({
@@ -220,14 +220,12 @@ router.put("/:id", function (req, res, next) {
     }
   }).catch(function (err) {
     res.send(500);
-    console.log(err)
   });
 });
 
 /* DELETE individual book. */
 router.delete("/:id", function (req, res, next) {
   Book.findByPk(req.params.id).then(function (book) {
-    console.log
     if (book) {
       return book.destroy();
     } else {
@@ -238,7 +236,6 @@ router.delete("/:id", function (req, res, next) {
   }).catch(function (err) {
     res.send(500);
     res.send(err)
-    console.log(err)
   });
 });
 
