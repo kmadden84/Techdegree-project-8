@@ -82,6 +82,7 @@ router.get('/search', function (req, res, next) {
 });
 
 
+/* Paginated results from search */
 
 router.get('/search/page/:page', function (req, res, next) {
   const { term } = req.query;
@@ -140,13 +141,12 @@ router.post('/', function (req, res, next) {
 });
 
 
-
-/* Create a new article form. */
+/* Get Create a new article form. */
 router.get('/new', function (req, res, next) {
   res.render("books/new_book", { book: Book.build(), title: "New Book" });
 });
 
-/* Edit article form. */
+/* Get Edit article form. */
 router.get("/:id/edit", function (req, res, next) {
   Book.findByPk(req.params.id).then(function (book) {
     if (book) {
@@ -161,8 +161,7 @@ router.get("/:id/edit", function (req, res, next) {
 
 
 
-
-/* Delete article form. */
+/* Get Delete article form. */
 router.get("/:id/delete", function (req, res, next) {
   Book.findByPk(req.params.id).then(function (book) {
     if (book) {
@@ -174,8 +173,6 @@ router.get("/:id/delete", function (req, res, next) {
     res.send(500);
   });
 });
-
-
 
 /* GET individual book. */
 router.get("/:id", function (req, res, next) {
