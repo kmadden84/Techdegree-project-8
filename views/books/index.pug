@@ -38,7 +38,6 @@ block content
     var pages = "#{pages}";
     var route = "#{routeUrl}";
 
-    console.log(route);
     var elem = '';
     for (i=1;i<=pages; i++) {
       var pageNum = i;
@@ -58,7 +57,6 @@ block content
     }
     var currentPage = window.location.pathname.split('/page/')[1];
     var selectedButton = document.querySelectorAll('#container a');
-    console.log(selectedButton);
     if (window.location.href.indexOf('search?term') > -1) {
         document.querySelectorAll('#container a')[1].classList.add('active');
     }    
